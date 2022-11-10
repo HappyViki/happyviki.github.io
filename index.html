@@ -1,84 +1,54 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Veronicodes</title>
-
-    <style>
-        .section-break {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 32px 0;
-        }
-        .heart {
-            width: 25px;
-        }
-        .curve {
-            border: 2px solid #343a40;
-            border-top: none;
-            width: 100px;
-            height: 25px;
-        }
-        .curve-right {
-            border-right: none;
-            border-radius: 100px 0 0 25px;
-        }
-        .curve-left {
-            border-left: none;
-            border-radius: 0 100px 25px 0;
-        }
-        .profile {
-            border: 16px double #343a40;
-        }
-    </style>
+    <link rel="icon" href="logo.svg">
+    <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
-    <div class="container">
-        <div class="jumbotron bg-white">
-            <h1 class="display-4">Veronicodes</h1>
-            <p class="lead">Fixing bugs one semicolon at a time;</p>
-            <hr class="my-4">
-            <img src="https://avatars.githubusercontent.com/u/14225943" class="profile rounded float-left mr-4" alt="Veronica Eulenberg">
-            <p>Veronica Eulenberg is a full stack engineer with 5 years experience. She has collaborated on user-focused, responsive-design, and cross-browser compatible solutions. Her strengths are in CSS, JavaScript, troubleshooting, and modifying WordPress site functionality and design.</p>
-
-            <p>HTML, CSS, JavaScript, jQuery, ReactJS, NodeJS, PHP, MySQL, and WordPress.</p>
-            
-            <p>Seeking to work with professional people that have a positive attitude and a good sense of humor.</p>
-            <p class="lead">
-                <a class="btn btn-primary btn-lg" href="https://www.linkedin.com/in/veronica-eulenberg/" role="button">Connect on LinkedIn</a>
-                <a class="btn btn-dark btn-lg" href="https://github.com/HappyViki/" role="button">Portfolio on GitHub</a>
-            </p>
-        </div>
-
-        <div class="section-break">
-            <div class="curve curve-left"></div>
-            <img class="heart" src="heart.svg" alt="heart">
-            <div class="curve curve-right"></div>
-        </div>
-
+    <div class="page success hidden">
+        Success, you have sent me a message! <br/> I'll get back to you as soon as I can.
     </div>
+    <div class="page">
+        <h1>Veronicodes <img class="logo" src="logo.svg" /></h1>
+        <p>Fixing bugs one semicolon at a time;</p>
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-        crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-        crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-        crossorigin="anonymous"></script>
+        <h2>About</h2>
+        <p>Veronica Eulenberg has been professionally programming since 2017. She has collaborated on <span class="keyword">user-focused</span>, <span class="keyword">responsive-design</span>, and <span class="keyword">cross-browser</span> compatible solutions with various customers. Her strengths are in HTML, CSS, JavaScript, jQuery, ReactJS, NodeJS, PHP, MySQL, and WordPress.</p>
+
+        <p>Security+ certified since 2021.</p>
+
+        <p>Read more on <a href="https://www.linkedin.com/in/veronica-eulenberg/">LinkedIn</a>.</p>
+
+        <p>Check out her code on <a href="https://github.com/HappyViki/">GitHub</a>.</p>
+
+        <form id="contact" name="contact" action="https://script.google.com/macros/s/AKfycby6TS6BuTkghvXCevJ_1dGXWo2hSgMRFRU6IM73cEZPhRe1up4KXxXK8MP1y1VWG7FIzQ/exec" method="POST">
+            <h3>How may I help you?</h3>
+            <input class="type" type="checkbox" name="teach" id="teach">
+            <label for="teach">Teach!</label>
+            <input class="type" type="checkbox" name="fix" id="fix">
+            <label for="fix">Fix!</label>
+            <input class="type" type="checkbox" name="test" id="test">
+            <label for="test">Test!</label>
+            <input class="type" type="checkbox" name="talk" id="talk">
+            <label for="talk">Talk!</label>
+            <textarea class="field" name="msg"></textarea>
+            <h3>How shall I contact you?</h3>
+            <div class="contact">
+                <label for="user">Name</label>
+                <input class="field" type="text" name="user" id="user" />
+                <label for="email">Email</label>
+                <input class="field" type="email" name="email" id="email" />
+                <label for="phone">Phone</label>
+                <input class="field" type="tel" name="phone" id="phone" />
+                <div class="errorMsg"></div>
+                <input class="submit" type="submit" name="submit" value="Send" />
+            </div>
+        </form>
+        <script src="form_validation.js"></script>
+    </div>   
 </body>
-
 </html>

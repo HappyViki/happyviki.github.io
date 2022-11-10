@@ -1,0 +1,68 @@
+body {
+    margin: 0;
+    font-family: Tahoma, sans-serif;
+}
+
+.hidden {
+    display: none;
+}
+
+.page {
+    background-color: #ffe5e5;
+    max-width: 500px;
+    padding: 32px;
+}
+
+.success {
+    background-color: #e6ffe5;
+}
+
+h1 .logo {
+    width: 2rem;
+}
+
+.keyword {
+    color: purple;
+}
+
+/* form */
+
+.field {
+    font-size: 1.25rem;
+    border-radius: 5px;
+    border: none;
+    width: 100%;
+    padding: 8px;
+}
+
+textarea.field {
+    height: 100px;
+}
+
+form .submit {
+    border-radius: 5px;
+    border: none;
+    font-size: 1.5rem;
+    background-color: #4ab46c;
+    color: #fff;
+    padding: 10px 20px;
+}
+
+.submit, .contact label {
+    display: block;
+    margin-top: 16px;
+}
+
+@media only screen and (min-width: 600px) {
+body {
+    background-image: url("confetti-doodles.svg");
+    background-color: #aa3333;
+    background-attachment: fixed;
+    /* background by SVGBackgrounds.com */
+}
+
+.page {
+    border-radius: 15px;
+    margin: 5% auto;
+}
+}

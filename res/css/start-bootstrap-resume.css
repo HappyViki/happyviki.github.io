@@ -10940,6 +10940,13 @@ p.lead {
   background-color: #bd5d38;
 }
 
+.social-icon.resume-link {
+  width: unset;
+  border-radius: 25px;
+  padding: 0 1.5rem;
+  text-decoration: unset;
+}
+
 .dev-icons {
   font-size: 3rem;
 }

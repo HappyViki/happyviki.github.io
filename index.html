@@ -18,11 +18,23 @@
             .hide-details .toggle-details {
                 display: none;
             }
+            .social-icons .social-icon:hover, .btn-dark {
+                background-color: #503138;
+                border-color: #503138;
+            }
+            .border-primary {
+                border-color: #503138 !important;
+            }
+            .main-brand .img-profile {
+                max-width: 10rem;
+                max-height: 10rem;
+                border: 0.5rem solid #503138;
+            }
         </style>
     </head>
     <body id="page-top">
         <!-- Navigation-->
-        <nav class="navbar navbar-expand-lg navbar-dark fixed-top overflow-auto" style="background: #343a40" id="sideNav">
+        <nav class="navbar navbar-expand-lg navbar-dark fixed-top overflow-auto" style="background: #503138" id="sideNav">
             <a class="navbar-brand js-scroll-trigger" href="#page-top">
                 <span class="d-block d-lg-none">Veronica Eulenberg</span>
                 <span class="d-none d-lg-block"><img class="img-fluid img-profile rounded-circle mx-auto mb-2" src="assets/img/profile.jpg" alt="..." /></span>
@@ -39,22 +51,25 @@
         <!-- Page Content-->
         <div class="container-fluid p-0">
             <!-- About-->
-            <section class="resume-section" id="about">
+            <section class="resume-section pt-4" id="about">
                 <div class="resume-section-content">
+                    <span class="main-brand d-block d-lg-none">
+                        <img class="img-fluid img-profile rounded-circle mx-auto mb-2" src="assets/img/profile.jpg" alt="..." />
+                    </span>
                     <h1 class="mb-0">
                         Veronica
-                        <span class="text-primary">Eulenberg</span>
+                        <div style="color: #503138">Eulenberg</div>
                     </h1>
                     <div class="subheading">
-                        Full Stack Engineer (6 years)
+                        Sr. React Engineer (7 years)
                     </div>
                     <div class="subheading">
-                        CSS • JS • Node • React • SQL
+                        CSS • JS • Node • React • UI / UX
                     </div>
                     <div class="subheading mb-5">
                         Dallas, TX
                     </div>
-                    <p class="lead">I have 6 years of work experience in software development. I love to fix and customize user-focused, responsive-design and cross-browser compatible solutions. My strengths are in <span class="text-primary">CSS, JavaScript, Node, React, and SQL</span>. Seeking to work with professionals that have a positive attitude and a good sense of humor.</p>
+                    <p class="lead">I have 7 years of experience in front end development. I love to fix and customize user-focused, responsive-design and cross-browser compatible solutions. My strengths are in <span style="color: #503138">CSS, JavaScript, and ReactJS</span>. Seeking to work with professionals that have a positive attitude and a good sense of humor.</p>
                     
                     <div class="social-icons mt-5">
                         <a class="social-icon" href="https://www.linkedin.com/in/veronica-eulenberg/"><i class="fab fa-linkedin-in"></i></a>
@@ -94,7 +109,7 @@
                                 <p>Built a subtitle editing app to seamlessly edit and preview subtitles. The main feature is the ability to replay video sections. This is useful if you're writing subtitles in another language or the speech isn't clear.</p>
 
                                 <p>First, I developed the bare-bones app in vanilla JavaScript. Then, I bought a template and integrated VideoJS JavaScript library to make the app user-friendly.</p>
-                                <a href="https://www.veronicodes.com/subtitler/" class="btn btn-primary text-white mt-3">Try it!</a>
+                                <a href="https://www.veronicodes.com/subtitler/" class="btn btn-dark text-white mt-3">Try it!</a>
                             </div>
                         </div>
                     </div>

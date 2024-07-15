@@ -14,26 +14,8 @@
         <link href="https://fonts.googleapis.com/css?family=Muli:400,400i,800,800i" rel="stylesheet" type="text/css" /> -->
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="assets/css/start-bootstrap-resume.css" rel="stylesheet" />
-        <style>
-            .hide-details .toggle-details {
-                display: none;
-            }
-            .social-icons .social-icon:hover, .btn-dark {
-                background-color: #503138;
-                border-color: #503138;
-            }
-            .border-primary {
-                border-color: #503138 !important;
-            }
-            .main-brand .img-profile {
-                max-width: 10rem;
-                max-height: 10rem;
-                border: 0.5rem solid #503138;
-            }
-            section.resume-section {
-                min-height: 100vh;
-            }
-        </style>
+        <link rel="stylesheet" href="assets/css/style.css">
+        <link rel="stylesheet" href="assets/css/timeline.css">
     </head>
     <body id="page-top">
         <!-- Navigation-->
@@ -46,7 +28,8 @@
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav">
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#about">About</a></li>
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#projects">Projects</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#timeline">Timeline</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#projects">Project</a></li>
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#contact">Contact</a></li>
                 </ul>
             </div>
@@ -64,7 +47,7 @@
                         <div style="color: #503138">Eulenberg</div>
                     </h1>
                     <div class="subheading">
-                        Sr. React Engineer (7 years)
+                        Front End Dev (Since '17)
                     </div>
                     <div class="subheading">
                         CSS • JS • Node • React • UI / UX
@@ -72,13 +55,61 @@
                     <div class="subheading mb-5">
                         Dallas, TX
                     </div>
-                    <p class="lead">I have 7 years of experience in front end development. I love to fix and customize user-focused, responsive-design and cross-browser compatible solutions. My strengths are in <span style="color: #503138">CSS, JavaScript, and ReactJS</span>. Seeking to work with professionals that have a positive attitude and a good sense of humor.</p>
+                    <p class="lead">Developing software since 2017. I love to fix and customize user-focused, responsive-design and cross-browser compatible solutions. My strengths are in <span style="color: #503138">CSS, JavaScript, and ReactJS</span>. Seeking to work with professionals that have a positive attitude and a good sense of humor.</p>
                     
                     <div class="social-icons mt-5">
                         <a class="social-icon" href="https://www.linkedin.com/in/veronica-eulenberg/"><i class="fab fa-linkedin-in"></i></a>
                         <a class="social-icon" href="https://github.com/HappyViki/"><i class="fab fa-github"></i></a>
-                        <a class="social-icon resume-link" href="assets/img/VeronicaEulenbergResume2024.pdf">Resume</a>
+                        <!-- <a class="social-icon resume-link" href="assets/img/VeronicaEulenbergResume2024.pdf">Resume</a> -->
                     </div>
+                </div>
+            </section>
+            <hr class="m-0" />
+
+            <!-- Timeline -->
+            <section class="resume-section" id="timeline">
+                <div class="resume-section-content">
+                    <h2 class="mb-5">Timeline</h2>
+
+                    <div id="timeline" class="timeline">
+                        <div class="container left">
+                          <div class="content">
+                            <h3>Programming and robotics teacher</h3>
+                            <p>March 2024 • iCode • Dallas, TX</p>
+                          </div>
+                        </div>
+                        <div class="container right">
+                          <div class="content">
+                            <h3>Data Annotator</h3>
+                            <p>October 2021 • Moveworks • Mountain View, CA</p>
+                          </div>
+                        </div>
+                        <div class="container left">
+                          <div class="content">
+                            <h3>Customer Support React Contractor</h3>
+                            <p>March 2021 • LifeOmic • SLC, UT</p>
+                          </div>
+                        </div>
+                        <div class="container right">
+                          <div class="content">
+                            <h3>React Developer Intern</h3>
+                            <p>May 2020 • MX • Lehi, UT</p>
+                          </div>
+                        </div>
+                        <div class="container left">
+                          <div class="content">
+                            <h3>React Developer Intern</h3>
+                            <p>September 2019 • JustUtahCoders • SLC, UT</p>
+                          </div>
+                        </div>
+                        <div class="container right">
+                          <div class="content">
+                            <h3>WordPress Developer</h3>
+                            <p>February 2017 • Remote</p>
+                          </div>
+                        </div>
+                      </div>
+
                 </div>
             </section>
             <hr class="m-0" />
@@ -86,20 +117,7 @@
             <!-- Projects -->
             <section class="resume-section" id="projects">
                 <div class="resume-section-content">
-                    <h2 class="mb-5">Projects</h2>
-
-                    <div class="mb-5">
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <img src="assets/img/ticktr.png" class="img-fluid rounded border border-primary mb-3" alt="Screenshot of subtitle editing project">
-                            </div>
-                            <div class="col-sm-6">
-                                <h3 class="mb-3">Project Ticket Manager</h3>
-
-                                <p>Developed an API in Node using Express, Passport, Mongoose, and MongoDB. Modified React + Tailwind client (TailAdmin) to ingest data from my CRUD (create, read, update, and delete) and authentication and authorization endpoints.</p>
-                            </div>
-                        </div>
-                    </div>
+                    <h2 class="mb-5">Project</h2>
 
                     <div>
                         <div class="row">
@@ -130,7 +148,7 @@
 
                     <div class="social-icons mt-5">
                         <a class="social-icon" href="https://www.linkedin.com/in/veronica-eulenberg/"><i class="fab fa-linkedin-in"></i></a>
-                        <a class="social-icon resume-link" href="assets/img/VeronicaEulenbergResume2024.pdf">Resume</a>
+                        <!-- <a class="social-icon resume-link" href="assets/img/VeronicaEulenbergResume2024.pdf">Resume</a> -->
                     </div>
                 </div>
             </section>
@@ -139,7 +157,5 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
         <script src="assets/js/start-bootstrap-resume.js"></script>
-
-        <script src="assets/js/experience.js"></script>
     </body>
 </html>

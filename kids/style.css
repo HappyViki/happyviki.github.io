@@ -43,6 +43,14 @@ header p {
     margin: 1rem 0;
 }
 
+.img-container {
+    text-align: center;
+}
+
+.img {
+    max-width: 100%;
+}
+
 form {
     display: flex;
     flex-direction: column;
@@ -61,19 +69,22 @@ input, textarea, button, .btn {
 }
 
 button, .btn {
-    display: inline-block;
+    display: block;
     background-color: #503138;
     color: white;
     border: none;
     cursor: pointer;
     text-decoration: none;
     margin: 2rem 0;
-    width: 100%;
     text-align: center;
 }
 
 button:hover, .btn:hover {
     background-color: #2c1a1e;
+}
+
+.contact.btn {
+    font-size: 2rem;
 }
 
 footer {

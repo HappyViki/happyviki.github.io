@@ -1,0 +1,105 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f8ff;
+    margin: 0;
+    padding: 0;
+}
+
+iframe {
+    width: 100%;
+    height: 315px;
+}
+
+.header, .content, .footer {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap-reverse;
+    width: 100%;
+}
+
+.media {
+    max-width: 100%;
+    outline: 3px solid #333;
+    border-radius: 5px;
+}
+
+.img-profile {
+    max-width: 270px;
+}
+
+.browser {
+    max-width: 300px;
+    min-height: 200px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.header .browser, .footer .browser {
+    max-width: 100%;
+    width: 620px;
+    text-align: center;
+}
+
+.browser-header {
+    height: 30px;
+    background-color: #333;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+}
+
+.browser-header .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-right: 5px;
+}
+
+.browser-header .dot:nth-child(1) {
+    background-color: #ff5f56;
+}
+
+.browser-header .dot:nth-child(2) {
+    background-color: #ffbd2e;
+}
+
+.browser-header .dot:nth-child(3) {
+    background-color: #28c940;
+}
+
+.browser-content {
+    flex: 1;
+    padding: 15px;
+    color: #333;
+    font-size: 16px;
+}
+
+.btn {
+    padding: 0.8rem;
+    font-size: 2rem;
+    display: block;
+    background: linear-gradient(135deg, #8b52ff, #5ddfe6);
+    color: #001e47;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    text-decoration: none;
+    margin: 2rem 10px;
+    text-align: center;
+}
+
+.btn:hover {
+    background: linear-gradient(135deg, #5ddfe6, #8b52ff);
+}
+
+@media (max-width: 650px) {
+    .browser, .btn {
+        max-width: 100%;
+    }
+}

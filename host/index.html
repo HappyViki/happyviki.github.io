@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website Hosting | Veronicodes</title>
+    <link rel="icon" type="image/x-icon" href="../assets/img/logo.svg" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            background-color: #0cc0df;
+        }
+        ul {
+            text-align: left;
+        }
+        .container {
+            max-width: 900px;
+            margin: auto;
+            padding: 20px;
+        }
+        .banner {
+            max-width: 100%;
+            height: 165px;
+            background: url('../assets/img/hostbanner.png') center/cover no-repeat;
+            border-bottom: #000 3px solid;
+        }
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        .plan {
+            padding: 20px;
+            border-left: 5px solid #f7ce4d;
+        }
+        .plan h2, .plan h3 {
+            color: #000;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 2px #f7ce4d;
+        }
+        .plan h2 {
+            text-align: center;
+        }
+        .plan h3.subheading {
+            margin-top: 0;
+        }
+        .plan p {
+            font-size: 16px;
+            color: #000;
+            text-align: left;
+            padding-left: 10px;
+        }
+        .profile-pic {
+            width: 120px;
+            height: 120px;
+            object-fit: cover;
+            margin-bottom: 10px;
+            border: 3px solid #000;
+            box-shadow: 8px 5px 2px #f7ce4d;
+            border-radius: 5px;
+        }
+        .btn {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 12px 25px;
+            background: #f7ce4d;
+            color: black;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 16px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+        .btn:hover {
+            background: #0cc0df;
+        }
+        .pricing-table {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        .pricing-table .card {
+            flex: 1;
+            min-width: 250px;
+            margin: 0;
+        }
+        .highlight {
+            background: #f7ce4d;
+        }
+        .left {
+            text-align: left;
+        }
+        @media (max-width: 768px) {
+            .pricing-table {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="banner"></div>
+    <div class="container">
+        <div class="card">
+            <h1>Subscribe to Website Maintenance</h1>
+            <p>I Keep <span class="highlight">Your Website</span> Running Smoothly—So You Can Focus on <span class="highlight">Your Business</span>!</p>
+            <a href="https://forms.gle/HZ14ncJWSjiQZWoG8" class="btn">Service Website</a>
+        </div>
+
+        <div class="pricing-table">
+            <div class="card plan">
+                <h3>Basic ($75/month)</h3>
+                <p>✔ Security updates</p>
+                <p>✔ Backups</p>
+                <p>✔ Minor content updates (text/images)</p>
+            </div>
+            
+            <div class="card plan">
+                <h3>Standard ($200/month)</h3>
+                <p>⚡ Everything in Basic</p>
+                <p>✔ SEO optimization</p>
+                <p>✔ Performance improvements</p>
+            </div>
+            
+            <div class="card plan">
+                <h3>Premium Custom Pricing</h3>
+                <h3 class="subheading">(Starting at $500/month)</h3>
+                <p>🚀 Everything in Standard</p>
+                <p>✔ Up to 20 hours of work</p>
+                <p>✔ Major updates, new pages, advanced SEO</p>
+            </div>
+        </div>
+
+        <div class="card plan left">
+            <h2>My Services</h2>
+            <h3>Page Edits</h3>
+            <p>Need to update your menu, hours, events, or add new services? I'll handle it for you.</p>
+            <h3>Security Updates</h3>
+            <p>Protect your website from hackers and keep your client data safe.</p>
+            <h3>Reliable Backups</h3>
+            <p>Rest easy knowing your website is always secure and restorable.</p>
+            <h3>SEO Optimization</h3>
+            <p>Improve your Google ranking so more customers can find you.</p>
+        </div>
+
+        <div class="card plan about">
+            <h2>Why Choose Veronicodes?</h2>
+            <img src="../assets/img/profile.jpg" alt="Your Profile Picture" class="profile-pic">
+            <p>Veronica Eulenberg has 4+ years of experience in website management: helping businesses improve security, stay updated, and boost online visibility.</p>
+            <h3 class="left">Let's make your website work for you!</h3>
+            <p>✔ Keep Your Website Up-to-Date</p>
+            <p>✔ Flexible, Month-to-Month Basis</p>
+            <p>✔ Fast & Reliable Support</p>
+            <p>✔ No Agency Markups, Just Personal Service</p>
+            <a href="https://forms.gle/HZ14ncJWSjiQZWoG8" class="btn">Service Website</a>
+        </div>
+    </div>
+</body>
+</html>

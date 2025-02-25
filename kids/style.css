@@ -24,6 +24,10 @@ header p {
     font-size: 1.2rem;
 }
 
+.text-center {
+    text-align: center;
+}
+
 .container {
     max-width: 800px;
     margin: 2rem auto;
@@ -81,6 +85,30 @@ button, .btn {
 
 button:hover, .btn:hover {
     background-color: #2c1a1e;
+}
+
+.faq-item {
+    background: none;
+    color: #503138;
+    border-bottom: 3px solid #503138;
+    width: 100%;
+}
+
+.faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-in-out, padding 0.3s ease-in-out;
+    background: #f1f1f1;
+    padding: 0 15px;
+}
+
+input[type="checkbox"] {
+    display: none;
+}
+
+input[type="checkbox"]:checked + .faq-answer {
+    max-height: 300px; /* Increased to fit longer answers */
+    padding: 15px;
 }
 
 .contact.btn {

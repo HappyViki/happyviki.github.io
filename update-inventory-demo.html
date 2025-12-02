@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<title>Update Inventory Demo</title>
+<title>Update Inventory Demo 2</title>
 <style>
     body {
         font-family: Arial, sans-serif;
@@ -151,9 +151,12 @@ async function lookupISBN() {
     `;
 
     // Send data to Google Sheets
-    await fetch("https://script.google.com/macros/s/AKfycbyYJpK7PWM6T2ghBVIG2Y8QOHHinsFMqNgQ63hu8zTCyTIP_iVhypBoSCO7LntBWx0/exec", {
+    await fetch("https://script.google.com/macros/s/AKfycbzKVmS71dEmqasHXJBDrGx2GnWE4r6drBm6-kbq8iDxJbontgEZNnnL_kubNAOF5xXG/exec", {
         method: "POST",
-        contentType: "application/json",
+        mode: "cors",
+        headers: {
+            "Content-Type": "application/json"
+        },
         body: JSON.stringify({
             isbn: isbn,
             title: data.title,

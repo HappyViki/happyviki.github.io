@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Update Inventory Demo</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 40px;
+        background: #f7f7f7;
+    }
+
+    h1 { margin-bottom: 20px; }
+
+    .input-row {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 20px;
+    }
+
+    input, select {
+        padding: 10px;
+        font-size: 16px;
+        width: 260px;
+    }
+
+    button {
+        padding: 10px 16px;
+        background: #0077cc;
+        color: white;
+        border: none;
+        cursor: pointer;
+        font-size: 16px;
+        border-radius: 4px;
+    }
+
+    button:hover { background: #005fa3; }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        background: white;
+    }
+
+    th, td {
+        border: 1px solid #ddd;
+        padding: 10px;
+        cursor: pointer;
+    }
+
+    th {
+        background: #eee;
+    }
+
+    td:hover {
+        background: #e8f2ff;
+    }
+
+    img {
+        max-height: 100px;
+    }
+</style>
+</head>
+
+<body>
+<h1>Update Inventory</h1>
+
+<div class="input-row">
+    <input id="isbnInput" placeholder="Scan or type ISBN…" />
+
+    <!-- NEW CATEGORY DROPDOWN -->
+    <select id="categorySelect">
+        <option value="">Category</option>
+        <option>Picture Books</option>
+        <option>Early Readers</option>
+        <option>Chapter Books</option>
+        <option>Middle Grade</option>
+        <option>Graphic Novels</option>
+        <option>Nonfiction</option>
+        <option>Biography</option>
+        <option>Poetry</option>
+    </select>
+
+    <button onclick="lookupISBN()">Add Book</button>
+</div>
+
+<table id="resultsTable">
+    <thead>
+        <tr>
+            <th>ISBN</th>
+            <th>Title</th>
+            <th>Authors</th>
+            <th>Thumbnail</th>
+            <th>Category</th>
+        </tr>
+    </thead>
+    <tbody></tbody>
+</table>
+
+<script>
+const isbnField = document.getElementById("isbnInput");
+const categorySelect = document.getElementById("categorySelect");
+isbnField.focus();
+
+async function getBookInfo(isbn) {
+    const url = `https://www.googleapis.com/books/v1/volumes?q=isbn:${isbn}`;
+    try {
+        const res = await fetch(url);
+        const data = await res.json();
+
+        if (!data.items || data.items.length === 0) return null;
+
+        const info = data.items[0].volumeInfo;
+        return {
+            title: info.title || "",
+            authors: info.authors ? info.authors.join(", ") : "",
+            thumbnail: info.imageLinks ? info.imageLinks.thumbnail : ""
+        };
+    } catch {
+        return null;
+    }
+}
+
+async function lookupISBN() {
+    const isbn = isbnField.value.trim();
+    const category = categorySelect.value;
+
+    if (!isbn) return;
+
+    const data = await getBookInfo(isbn);
+    const tableBody = document.querySelector("#resultsTable tbody");
+    const row = document.createElement("tr");
+
+    if (!data) {
+        row.innerHTML = `
+            <td>${isbn}</td>
+            <td colspan="3" style="color:red;">Not found</td>
+            <td>${category}</td>
+        `;
+        tableBody.prepend(row);
+        isbnField.value = "";
+        return;
+    }
+
+    row.innerHTML = `
+        <td>${isbn}</td>
+        <td>${data.title}</td>
+        <td>${data.authors}</td>
+        <td><img src="${data.thumbnail}" /></td>
+        <td>${category}</td>
+    `;
+
+    // Send data to Google Sheets
+    await fetch("https://script.google.com/macros/s/AKfycbyYJpK7PWM6T2ghBVIG2Y8QOHHinsFMqNgQ63hu8zTCyTIP_iVhypBoSCO7LntBWx0/exec", {
+        method: "POST",
+        contentType: "application/json",
+        body: JSON.stringify({
+            isbn: isbn,
+            title: data.title,
+            authors: data.authors,
+            category: category
+        })
+    });
+
+    tableBody.prepend(row);
+
+    isbnField.value = "";
+    isbnField.focus();
+}
+
+/* ENTER = SUBMIT */
+document.getElementById("isbnInput").onkeydown = function(e){
+   if (e.keyCode == 13) lookupISBN();
+};
+</script>
+
+<!-- CLICK TO COPY (unchanged) -->
+<script>
+document.addEventListener("click", function (e) {
+    if (e.target.tagName !== "TD") return;
+
+    const img = e.target.querySelector("img");
+    const text = img ? img.src : e.target.textContent.trim();
+
+    navigator.clipboard.writeText(text).then(() => {
+        showCopiedPopup(e.pageX, e.pageY);
+        e.target.style.background = "#d5f7d5";
+        setTimeout(() => { e.target.style.background = ""; }, 400);
+    });
+});
+
+function showCopiedPopup(x, y) {
+    const popup = document.createElement("div");
+    popup.textContent = "Copied!";
+    popup.style.position = "absolute";
+    popup.style.top = `${y - 30}px`;
+    popup.style.left = `${x}px`;
+    popup.style.padding = "4px 8px";
+    popup.style.background = "#222";
+    popup.style.color = "white";
+    popup.style.borderRadius = "4px";
+    popup.style.fontSize = "12px";
+    popup.style.opacity = "0";
+    popup.style.transition = "opacity .25s ease";
+    popup.style.pointerEvents = "none";
+    popup.style.zIndex = 9999;
+
+    document.body.appendChild(popup);
+    requestAnimationFrame(() => popup.style.opacity = 1);
+
+    setTimeout(() => {
+        popup.style.opacity = 0;
+        setTimeout(() => popup.remove(), 250);
+    }, 800);
+}
+</script>
+
+</body>
+</html>

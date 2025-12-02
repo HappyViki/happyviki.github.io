@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Lookup Book</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 40px;
+        background: #f7f7f7;
+    }
+
+    h1 { margin-bottom: 20px; }
+
+    .input-row {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 20px;
+    }
+
+    input {
+        padding: 10px;
+        font-size: 16px;
+        width: 260px;
+    }
+
+    button {
+        padding: 10px 16px;
+        background: #0077cc;
+        color: white;
+        border: none;
+        cursor: pointer;
+        font-size: 16px;
+        border-radius: 4px;
+    }
+
+    button:hover { background: #005fa3; }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        background: white;
+    }
+
+    th, td {
+        border: 1px solid #ddd;
+        padding: 10px;
+        cursor: pointer;
+    }
+
+    th {
+        background: #eee;
+    }
+
+    td:hover {
+        background: #e8f2ff;
+    }
+
+    img {
+        max-height: 100px;
+    }
+</style>
+</head>
+
+<body>
+<h1>ISBN Google Books Fetcher</h1>
+
+<div class="input-row">
+    <input id="isbnInput" placeholder="Scan or type ISBN…" />
+    <button onclick="lookupISBN()">Add Book</button>
+</div>
+
+<a href="https://books.google.com/advanced_book_search">Advanced Book Search</a>
+
+<table id="resultsTable">
+    <thead>
+        <tr>
+            <th>ISBN</th>
+            <th>Title</th>
+            <th>Authors</th>
+            <th>Thumbnail</th>
+        </tr>
+    </thead>
+    <tbody></tbody>
+</table>
+
+<script>
+async function getBookInfo(isbn) {
+    const url = `https://www.googleapis.com/books/v1/volumes?q=isbn:${isbn}`;
+    try {
+        const res = await fetch(url);
+        const data = await res.json();
+
+        if (!data.items || data.items.length === 0) {
+            return null;
+        }
+
+        const info = data.items[0].volumeInfo;
+        return {
+            title: info.title || "",
+            authors: info.authors ? info.authors.join(", ") : "",
+            thumbnail: info.imageLinks ? info.imageLinks.thumbnail : ""
+        };
+    } catch (err) {
+        console.error("Fetch error:", err);
+        return null;
+    }
+}
+
+async function lookupISBN() {
+    const isbnField = document.getElementById("isbnInput");
+    const isbn = isbnField.value.trim();
+
+    if (!isbn) return;
+
+    const data = await getBookInfo(isbn);
+
+    const tableBody = document.querySelector("#resultsTable tbody");
+    const row = document.createElement("tr");
+
+    if (!data) {
+        row.innerHTML = `
+            <td>${isbn}</td>
+            <td colspan="5" style="color:red;">Not found</td>
+        `;
+        tableBody.prepend(row);
+        isbnField.value = "";
+        return;
+    }
+
+    row.innerHTML = `
+        <td>${isbn}</td>
+        <td>${data.title}</td>
+        <td>${data.authors}</td>
+        <td><img src="${data.thumbnail}" /></td>
+    `;
+
+    tableBody.prepend(row);
+
+    isbnField.value = "";
+    isbnField.focus();
+}
+
+document.getElementById('isbnInput').onkeydown = function(e){
+   if(e.keyCode == 13){
+     lookupISBN();
+   }
+};
+</script>
+<script>
+/* -------- CLICK-TO-COPY HANDLER WITH POPUP -------- */
+document.addEventListener("click", function (e) {
+    if (e.target.tagName !== "TD") return;
+
+    let text = "";
+    const img = e.target.querySelector("img");
+
+    if (img) {
+        text = img.src;
+    } else {
+        text = e.target.textContent.trim();
+    }
+
+    navigator.clipboard.writeText(text).then(() => {
+        showCopiedPopup(e.pageX, e.pageY);
+        e.target.style.background = "#d5f7d5";
+        setTimeout(() => { e.target.style.background = ""; }, 400);
+    });
+});
+
+/* -------- POPUP ELEMENT -------- */
+function showCopiedPopup(x, y) {
+    const popup = document.createElement("div");
+    popup.textContent = "Copied!";
+    popup.style.position = "absolute";
+    popup.style.top = (y - 30) + "px";
+    popup.style.left = x + "px";
+    popup.style.padding = "4px 8px";
+    popup.style.background = "#222";
+    popup.style.color = "white";
+    popup.style.borderRadius = "4px";
+    popup.style.fontSize = "12px";
+    popup.style.opacity = "0";
+    popup.style.transition = "opacity 0.25s ease";
+    popup.style.pointerEvents = "none";
+    popup.style.zIndex = 9999;
+
+    document.body.appendChild(popup);
+
+    // fade in
+    requestAnimationFrame(() => {
+        popup.style.opacity = "1";
+    });
+
+    // fade out + remove
+    setTimeout(() => {
+        popup.style.opacity = "0";
+        setTimeout(() => popup.remove(), 250);
+    }, 800);
+}
+</script>
+
+</body>
+</html>

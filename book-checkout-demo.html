@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Book Checkout Demo</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 40px;
+        background: #f7f7f7;
+    }
+
+    h1 { margin-bottom: 20px; }
+
+    .input-row {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 20px;
+    }
+
+    input, select {
+        padding: 10px;
+        font-size: 16px;
+        width: 260px;
+    }
+
+    button {
+        padding: 10px 16px;
+        background: #0077cc;
+        color: white;
+        border: none;
+        cursor: pointer;
+        font-size: 16px;
+        border-radius: 4px;
+    }
+
+    button:hover { background: #005fa3; }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        background: white;
+    }
+
+    th, td {
+        border: 1px solid #ddd;
+        padding: 10px;
+        cursor: pointer;
+    }
+
+    th {
+        background: #eee;
+    }
+
+    td:hover {
+        background: #e8f2ff;
+    }
+
+    img {
+        max-height: 100px;
+    }
+</style>
+</head>
+
+<body>
+
+<h1>Book Checkout</h1>
+
+<div class="card">
+    <!-- Student Info -->
+    <div class="input-row">
+        <select id="school">
+            <option value="">School</option>
+            <option>Edgemont Elementary</option>
+            <option>Rocky Hill Elementary</option>
+            <option>Cedar Bluff Elementary</option>
+            <option>Norwood Elementary</option>
+        </select>
+
+        <select id="grade">
+            <option value="">Grade</option>
+            <option>K</option>
+            <option>1st</option>
+            <option>2nd</option>
+            <option>3rd</option>
+            <option>4th</option>
+            <option>5th</option>
+        </select>
+
+        <select id="gender">
+            <option value="">Gender</option>
+            <option>Male</option>
+            <option>Female</option>
+        </select>
+    </div>
+
+    <!-- TWO ISBN INPUTS + BUTTON -->
+    <div class="isbn-button-row">
+        <input id="isbn1" placeholder="Scan ISBN #1…" />
+        <input id="isbn2" placeholder="Scan ISBN #2…" />
+        <button onclick="submitBoth()">Add Books</button>
+    </div>
+</div>
+
+<table id="resultsTable" style="margin-top: 20px;">
+    <thead>
+        <tr>
+            <th>ISBN</th>
+            <th>Thumbnail</th>
+            <th>Title</th>
+            <th>Authors</th>
+            <th>School</th>
+            <th>Grade</th>
+            <th>Gender</th>
+        </tr>
+    </thead>
+    <tbody></tbody>
+</table>
+
+<script>
+/* Focus first ISBN on load */
+document.getElementById("isbn1").focus();
+
+/* GOOGLE BOOKS LOOKUP */
+async function getBookInfo(isbn) {
+    const url = `https://www.googleapis.com/books/v1/volumes?q=isbn:${isbn}`;
+    try {
+        const res = await fetch(url);
+        const data = await res.json();
+        if (!data.items || data.items.length === 0) return null;
+
+        const info = data.items[0].volumeInfo;
+        return {
+            title: info.title || "",
+            authors: info.authors ? info.authors.join(", ") : "",
+            thumbnail: info.imageLinks ? info.imageLinks.thumbnail : ""
+        };
+    } catch {
+        return null;
+    }
+}
+
+/* Add row for each ISBN */
+async function addRowForISBN(isbn, school, grade, gender) {
+    const data = await getBookInfo(isbn);
+    const tableBody = document.querySelector("#resultsTable tbody");
+    const row = document.createElement("tr");
+
+    if (!data) {
+        row.innerHTML = `
+            <td>${isbn}</td>
+            <td></td>
+            <td colspan="2" style="color:red;">Not found</td>
+            <td>${school}</td>
+            <td>${grade}</td>
+            <td>${gender}</td>
+        `;
+        tableBody.prepend(row);
+        return;
+    }
+
+    row.innerHTML = `
+        <td>${isbn}</td>
+        <td><img src="${data.thumbnail}" /></td>
+        <td>${data.title}</td>
+        <td>${data.authors}</td>
+        <td>${school}</td>
+        <td>${grade}</td>
+        <td>${gender}</td>
+    `;
+
+    tableBody.prepend(row);
+}
+
+/* MAIN SUBMIT FUNCTION */
+async function submitBoth() {
+    const school = document.getElementById("school").value;
+    const grade = document.getElementById("grade").value;
+    const gender = document.getElementById("gender").value;
+
+    if (!school || !grade || !gender) {
+        alert("Please select School, Grade, and gender first.");
+        return;
+    }
+
+    const isbn1 = document.getElementById("isbn1").value.trim();
+    const isbn2 = document.getElementById("isbn2").value.trim();
+
+    if (!isbn1 || !isbn2) return;
+
+    await addRowForISBN(isbn1, school, grade, gender);
+    await addRowForISBN(isbn2, school, grade, gender);
+
+    document.getElementById("isbn1").value = "";
+    document.getElementById("isbn2").value = "";
+    document.getElementById("isbn1").focus();
+}
+
+/* ENTER KEY FLOW */
+document.getElementById("isbn1").addEventListener("keydown", e => {
+    if (e.key === "Enter" && document.getElementById("isbn1").value.trim()) {
+        document.getElementById("isbn2").focus();
+    }
+});
+
+document.getElementById("isbn2").addEventListener("keydown", e => {
+    if (e.key === "Enter" && document.getElementById("isbn2").value.trim()) {
+        submitBoth();
+    }
+});
+</script>
+
+<!-- CLICK TO COPY (unchanged) -->
+<script>
+document.addEventListener("click", function (e) {
+    if (e.target.tagName !== "TD") return;
+
+    const img = e.target.querySelector("img");
+    const text = img ? img.src : e.target.textContent.trim();
+
+    navigator.clipboard.writeText(text).then(() => {
+        showCopiedPopup(e.pageX, e.pageY);
+        e.target.style.background = "#d5f7d5";
+        setTimeout(() => e.target.style.background = "", 400);
+    });
+});
+
+function showCopiedPopup(x, y) {
+    const popup = document.createElement("div");
+    popup.textContent = "Copied!";
+    popup.style.position = "absolute";
+    popup.style.top = `${y - 30}px`;
+    popup.style.left = `${x}px`;
+    popup.style.padding = "4px 8px";
+    popup.style.background = "#222";
+    popup.style.color = "white";
+    popup.style.borderRadius = "4px";
+    popup.style.fontSize = "12px";
+    popup.style.opacity = "0";
+    popup.style.transition = "opacity .25s ease";
+    popup.style.pointerEvents = "none";
+    popup.style.zIndex = 9999;
+
+    document.body.appendChild(popup);
+
+    requestAnimationFrame(() => popup.style.opacity = "1");
+
+    setTimeout(() => {
+        popup.style.opacity = "0";
+        setTimeout(() => popup.remove(), 250);
+    }, 800);
+}
+</script>
+
+</body>
+</html>

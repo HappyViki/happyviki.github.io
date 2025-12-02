@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<title>ISBN Fetcher</title>
+<title>Book Lookup Demo</title>
 <style>
     body {
         font-family: Arial, sans-serif;
@@ -63,7 +63,7 @@
 </head>
 
 <body>
-<h1>ISBN Google Books Fetcher</h1>
+<h1>ISBN Google Books Lookup</h1>
 
 <div class="input-row">
     <input id="isbnInput" placeholder="Scan or type ISBN…" />
@@ -85,6 +85,9 @@
 </table>
 
 <script>
+const isbnField = document.getElementById("isbnInput");
+isbnField.focus();
+
 async function getBookInfo(isbn) {
     const url = `https://www.googleapis.com/books/v1/volumes?q=isbn:${isbn}`;
     try {
@@ -108,7 +111,6 @@ async function getBookInfo(isbn) {
 }
 
 async function lookupISBN() {
-    const isbnField = document.getElementById("isbnInput");
     const isbn = isbnField.value.trim();
 
     if (!isbn) return;

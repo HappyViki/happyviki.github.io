@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact | Veronica Eulenberg</title>
+<style>
+  :root {
+    --red: #D62828;
+    --red-dark: #9B1B1B;
+    --red-light: #F9E5E5;
+    --black: #1A1A1A;
+    --white: #FFFFFF;
+    --gray: #F5F5F3;
+    --gray-mid: #888;
+    --spot: #FF6B6B;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    color: var(--black);
+    background: var(--white);
+    line-height: 1.7;
+  }
+
+  /* NAV */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--black);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 2rem;
+    gap: 1rem;
+  }
+
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    text-decoration: none;
+    color: var(--white);
+    font-weight: 600;
+    font-size: 1rem;
+    white-space: nowrap;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 1.5rem;
+    list-style: none;
+    flex-wrap: wrap;
+  }
+
+  .nav-links a {
+    color: #ccc;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover, .nav-links a.active { color: var(--spot); }
+
+  .nav-social {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+  }
+
+  .nav-social a {
+    color: #ccc;
+    transition: color 0.2s;
+    display: flex;
+    align-items: center;
+  }
+
+  .nav-social a:hover { color: var(--spot); }
+  .nav-social svg { width: 20px; height: 20px; fill: currentColor; }
+
+  .hamburger {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    color: white;
+  }
+
+  @media (max-width: 700px) {
+    .hamburger { display: flex; flex-direction: column; gap: 4px; }
+    .hamburger span { display: block; width: 22px; height: 2px; background: currentColor; border-radius: 2px; }
+    .nav-links { display: none; flex-direction: column; position: absolute; top: 52px; left: 0; right: 0; background: var(--black); padding: 1rem 2rem; gap: 1rem; border-top: 1px solid #333; }
+    .nav-links.open { display: flex; }
+    nav { position: relative; flex-wrap: wrap; }
+  }
+
+  /* PAGE HERO */
+  .page-hero {
+    background: var(--black);
+    color: var(--white);
+    padding: 3.5rem 2rem 3rem;
+    text-align: center;
+  }
+
+  .page-hero img {
+    width: 72px;
+    display: block;
+    margin: 0 auto 1.2rem;
+  }
+
+  .page-hero .section-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--spot);
+    margin-bottom: 0.4rem;
+  }
+
+  .page-hero h1 {
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 700;
+    margin-bottom: 0.6rem;
+  }
+
+  .page-hero h1 span { color: var(--red); }
+
+  .page-hero p {
+    color: #bbb;
+    font-size: 1rem;
+    max-width: 480px;
+    margin: 0 auto;
+  }
+
+  /* MAIN LAYOUT */
+  .contact-wrapper {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 4rem 1.5rem 5rem;
+    display: grid;
+    grid-template-columns: 1fr 380px;
+    gap: 3rem;
+    align-items: start;
+  }
+
+  @media (max-width: 720px) {
+    .contact-wrapper {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+  }
+
+  /* FORM SIDE */
+  .section-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--red);
+    margin-bottom: 0.4rem;
+  }
+
+  h2 {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    line-height: 1.2;
+  }
+
+  .divider {
+    width: 48px;
+    height: 3px;
+    background: var(--red);
+    border-radius: 2px;
+    margin-bottom: 1.75rem;
+  }
+
+  /* NETLIFY FORM */
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  @media (max-width: 500px) {
+    .form-row { grid-template-columns: 1fr; }
+  }
+
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .field label {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--black);
+    letter-spacing: 0.3px;
+  }
+
+  .field label .req {
+    color: var(--red);
+    margin-left: 2px;
+  }
+
+  .field input,
+  .field select,
+  .field textarea {
+    width: 100%;
+    padding: 0.7rem 0.9rem;
+    border: 1.5px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 0.93rem;
+    font-family: inherit;
+    color: var(--black);
+    background: var(--white);
+    transition: border-color 0.2s, box-shadow 0.2s;
+    outline: none;
+    appearance: none;
+  }
+
+  .field input:focus,
+  .field select:focus,
+  .field textarea:focus {
+    border-color: var(--red);
+    box-shadow: 0 0 0 3px rgba(214, 40, 40, 0.1);
+  }
+
+  .field input::placeholder,
+  .field textarea::placeholder {
+    color: #bbb;
+  }
+
+  .field textarea {
+    resize: vertical;
+    min-height: 130px;
+    line-height: 1.6;
+  }
+
+  .field select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23888' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.9rem center;
+    padding-right: 2.2rem;
+    cursor: pointer;
+  }
+
+  .field select option { color: var(--black); }
+
+  /* Checkbox row */
+  .check-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .check-label {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--black);
+    margin-bottom: 0.1rem;
+  }
+
+  .check-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .check-chip {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .check-chip input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    accent-color: var(--red);
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  .check-chip label {
+    font-size: 0.85rem;
+    color: #444;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  /* Submit button */
+  .submit-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    background: var(--red);
+    color: white;
+    border: none;
+    padding: 0.85rem 2rem;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+    align-self: flex-start;
+  }
+
+  .submit-btn:hover {
+    background: var(--red-dark);
+    transform: translateY(-1px);
+  }
+
+  .submit-btn:active { transform: translateY(0); }
+
+  .form-note {
+    font-size: 0.78rem;
+    color: var(--gray-mid);
+    margin-top: -0.25rem;
+  }
+
+  /* SUCCESS STATE */
+  .success-banner {
+    display: none;
+    background: #f0fdf4;
+    border: 1.5px solid #86efac;
+    border-radius: 12px;
+    padding: 1.25rem 1.5rem;
+    text-align: center;
+  }
+
+  .success-banner.visible { display: block; }
+
+  .success-banner p {
+    font-size: 0.95rem;
+    color: #166534;
+    font-weight: 500;
+  }
+
+  /* SIDEBAR */
+  .contact-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .sidebar-card {
+    background: var(--gray);
+    border-radius: 12px;
+    padding: 1.4rem 1.5rem;
+    border: 1px solid #e8e8e5;
+  }
+
+  .sidebar-card h3 {
+    font-size: 0.9rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--black);
+  }
+
+  .sidebar-links {
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+  }
+
+  .sidebar-link {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    text-decoration: none;
+    color: var(--black);
+    font-size: 0.88rem;
+    font-weight: 500;
+    padding: 0.6rem 0.85rem;
+    border-radius: 8px;
+    background: var(--white);
+    border: 1px solid #e5e5e5;
+    transition: border-color 0.2s, color 0.2s, transform 0.15s;
+  }
+
+  .sidebar-link:hover {
+    border-color: var(--red);
+    color: var(--red);
+    transform: translateX(3px);
+  }
+
+  .sidebar-link svg {
+    width: 18px;
+    height: 18px;
+    fill: currentColor;
+    flex-shrink: 0;
+  }
+
+  .sidebar-link .link-label {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .sidebar-link .link-sub {
+    font-size: 0.75rem;
+    color: var(--gray-mid);
+    font-weight: 400;
+  }
+
+  .sidebar-link:hover .link-sub { color: inherit; opacity: 0.7; }
+
+  /* Services list in sidebar */
+  .services-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .service-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    font-size: 0.85rem;
+    color: #444;
+    line-height: 1.5;
+  }
+
+  .service-dot {
+    width: 8px;
+    height: 8px;
+    background: var(--red);
+    border-radius: 50%;
+    margin-top: 6px;
+    flex-shrink: 0;
+  }
+
+  /* Availability badge */
+  .avail-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    background: #f0fdf4;
+    border: 1px solid #86efac;
+    color: #166534;
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 0.35rem 0.8rem;
+    border-radius: 100px;
+    margin-bottom: 0.75rem;
+  }
+
+  .avail-dot {
+    width: 7px;
+    height: 7px;
+    background: #22c55e;
+    border-radius: 50%;
+    animation: blink 2s infinite;
+  }
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  .sidebar-card p {
+    font-size: 0.85rem;
+    color: #555;
+    line-height: 1.65;
+  }
+
+  /* FOOTER */
+  footer {
+    background: #111;
+    text-align: center;
+    padding: 1.5rem;
+    color: #555;
+    font-size: 0.82rem;
+  }
+
+  footer span { color: var(--red); }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">
+    <svg width="28" height="28" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <ellipse cx="50" cy="62" rx="34" ry="30" fill="#D62828"/>
+      <circle cx="50" cy="34" r="18" fill="#1A1A1A"/>
+      <line x1="50" y1="32" x2="50" y2="92" stroke="#1A1A1A" stroke-width="4"/>
+      <circle cx="35" cy="58" r="8" fill="#1A1A1A"/>
+      <circle cx="65" cy="58" r="8" fill="#1A1A1A"/>
+      <circle cx="38" cy="73" r="6" fill="#1A1A1A"/>
+      <circle cx="62" cy="73" r="6" fill="#1A1A1A"/>
+      <line x1="50" y1="20" x2="42" y2="6" stroke="#1A1A1A" stroke-width="3" stroke-linecap="round"/>
+      <line x1="50" y1="20" x2="58" y2="6" stroke="#1A1A1A" stroke-width="3" stroke-linecap="round"/>
+      <circle cx="42" cy="5" r="3" fill="#1A1A1A"/>
+      <circle cx="58" cy="5" r="3" fill="#1A1A1A"/>
+      <circle cx="42" cy="28" r="4" fill="#fff" opacity="0.6"/>
+      <circle cx="58" cy="28" r="4" fill="#fff" opacity="0.6"/>
+    </svg>
+    veronicodes
+  </a>
+
+  <button class="hamburger" aria-label="Toggle menu" onclick="this.nextElementSibling.classList.toggle('open')">
+    <span></span><span></span><span></span>
+  </button>
+
+  <ul class="nav-links">
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="portfolio.html">Portfolio</a></li>
+    <li><a href="index.html#projects">Projects</a></li>
+    <li><a href="index.html#basics">Web Basics</a></li>
+    <li><a href="contact.html" class="active">Contact</a></li>
+  </ul>
+
+  <div class="nav-social">
+    <a href="https://www.linkedin.com/in/veronica-eulenberg/" target="_blank" rel="noopener" aria-label="LinkedIn">
+      <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+    </a>
+    <a href="https://github.com/HappyViki" target="_blank" rel="noopener" aria-label="GitHub">
+      <svg viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+    </a>
+    <a href="https://www.instagram.com/" target="_blank" rel="noopener" aria-label="Instagram">
+      <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+    </a>
+  </div>
+</nav>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <img src="https://www.veronicodes.com/assets/img/logo.svg" alt="Veronica's ladybug logo" onerror="this.style.display='none'">
+  <p class="section-label">Contact</p>
+  <h1>Let's Work <span>Together</span></h1>
+  <p>Have a bug to fix, a page to add, or a project in mind? Drop me a message and I'll get back to you soon.</p>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="contact-wrapper">
+
+  <!-- FORM -->
+  <div>
+    <p class="section-label">Send a Message</p>
+    <h2>Get in Touch</h2>
+    <div class="divider"></div>
+
+    <!-- SUCCESS BANNER (shown after Netlify redirect, or via JS) -->
+    <div class="success-banner" id="successBanner">
+      <p>🐞 Message received! I'll be in touch soon.</p>
+    </div>
+
+    <!--
+      NETLIFY FORM SETUP:
+      - The attributes data-netlify="true" and name="contact" are what Netlify detects at build time.
+      - The hidden input name="form-name" is required for Netlify's AJAX submission to work.
+      - netlify-honeypot="bot-field" adds spam protection — keep the bot-field input visually hidden.
+      - action="/contact?success=true" is the redirect after a standard (non-AJAX) submission.
+    -->
+    <form
+      name="contact"
+      method="POST"
+      data-netlify="true"
+      netlify-honeypot="bot-field"
+      action="/contact?success=true"
+      class="contact-form"
+      id="contactForm"
+    >
+      <!-- Required hidden fields for Netlify -->
+      <input type="hidden" name="form-name" value="contact">
+
+      <!-- Honeypot spam field — hidden from real users -->
+      <p style="display:none">
+        <label>Don't fill this out: <input name="bot-field"></label>
+      </p>
+
+      <div class="form-row">
+        <div class="field">
+          <label for="first-name">First name <span class="req">*</span></label>
+          <input type="text" id="first-name" name="first-name" placeholder="Veronica" required>
+        </div>
+        <div class="field">
+          <label for="last-name">Last name <span class="req">*</span></label>
+          <input type="text" id="last-name" name="last-name" placeholder="Eulenberg" required>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="email">Email address <span class="req">*</span></label>
+        <input type="email" id="email" name="email" placeholder="you@example.com" required>
+      </div>
+
+      <div class="field">
+        <label for="subject">What do you need help with? <span class="req">*</span></label>
+        <select id="subject" name="subject" required>
+          <option value="" disabled selected>Select a service...</option>
+          <option value="fix-bugs">Fix bugs on my website</option>
+          <option value="add-pages">Add a page to my existing site</option>
+          <option value="wordpress">WordPress customization</option>
+          <option value="react">React / JavaScript work</option>
+          <option value="css">CSS / UI polish</option>
+          <option value="full-project">New project from scratch</option>
+          <option value="dotnet">Frontend for a .NET project</option>
+          <option value="other">Something else</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="website">Your website URL <span style="color:var(--gray-mid);font-weight:400">(optional)</span></label>
+        <input type="url" id="website" name="website" placeholder="https://yoursite.com">
+      </div>
+
+      <div class="check-group">
+        <p class="check-label">Tech involved <span style="color:var(--gray-mid);font-weight:400;font-size:0.78rem">(check all that apply)</span></p>
+        <div class="check-options">
+          <div class="check-chip"><input type="checkbox" id="tech-wp" name="tech" value="WordPress"><label for="tech-wp">WordPress</label></div>
+          <div class="check-chip"><input type="checkbox" id="tech-react" name="tech" value="React"><label for="tech-react">React</label></div>
+          <div class="check-chip"><input type="checkbox" id="tech-js" name="tech" value="JavaScript"><label for="tech-js">JavaScript</label></div>
+          <div class="check-chip"><input type="checkbox" id="tech-css" name="tech" value="CSS"><label for="tech-css">CSS</label></div>
+          <div class="check-chip"><input type="checkbox" id="tech-jquery" name="tech" value="jQuery"><label for="tech-jquery">jQuery</label></div>
+          <div class="check-chip"><input type="checkbox" id="tech-dotnet" name="tech" value=".NET"><label for="tech-dotnet">.NET</label></div>
+          <div class="check-chip"><input type="checkbox" id="tech-other" name="tech" value="Other"><label for="tech-other">Other</label></div>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="message">Tell me more <span class="req">*</span></label>
+        <textarea id="message" name="message" placeholder="Describe what's broken, what you need, or what you have in mind. The more detail the better!" required></textarea>
+      </div>
+
+      <p class="form-note">* Required fields. I typically respond within 1–2 business days.</p>
+
+      <button type="submit" class="submit-btn">
+        Send message
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+      </button>
+    </form>
+  </div>
+
+  <!-- SIDEBAR -->
+  <div class="contact-sidebar">
+
+    <div class="sidebar-card">
+      <div class="avail-badge">
+        <div class="avail-dot"></div>
+        Available for work
+      </div>
+      <p>Based in Knoxville, TN. Open to remote freelance projects — fixing bugs, adding pages, and frontend work across WordPress, React, and more.</p>
+    </div>
+
+    <div class="sidebar-card">
+      <h3>Find me elsewhere</h3>
+      <div class="sidebar-links">
+        <a href="https://www.linkedin.com/in/veronica-eulenberg/" class="sidebar-link" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          <span class="link-label">
+            LinkedIn
+            <span class="link-sub">Connect professionally</span>
+          </span>
+        </a>
+        <a href="https://github.com/HappyViki" class="sidebar-link" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+          <span class="link-label">
+            GitHub
+            <span class="link-sub">See my code</span>
+          </span>
+        </a>
+        <a href="https://www.instagram.com/" class="sidebar-link" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+          <span class="link-label">
+            Instagram
+            <span class="link-sub">Say hi</span>
+          </span>
+        </a>
+      </div>
+    </div>
+
+    <div class="sidebar-card">
+      <h3>What I can help with</h3>
+      <div class="services-list">
+        <div class="service-item"><div class="service-dot"></div>Fix bugs on existing websites</div>
+        <div class="service-item"><div class="service-dot"></div>Add pages to existing sites</div>
+        <div class="service-item"><div class="service-dot"></div>WordPress customization & plugins</div>
+        <div class="service-item"><div class="service-dot"></div>React bug fixes & refactors</div>
+        <div class="service-item"><div class="service-dot"></div>CSS & responsive layout work</div>
+        <div class="service-item"><div class="service-dot"></div>Frontend for .NET projects</div>
+        <div class="service-item"><div class="service-dot"></div>jQuery & vanilla JS scripting</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>Made with ❤️ by <span>Veronica Eulenberg</span> &nbsp;·&nbsp; Fixing bugs one semicolon at a time<span>;</span></p>
+</footer>
+
+<script>
+  // Show success banner if redirected back with ?success=true
+  if (window.location.search.includes('success=true')) {
+    document.getElementById('successBanner').classList.add('visible');
+    document.getElementById('contactForm').style.display = 'none';
+  }
+
+  // Optional: AJAX submission so the page doesn't redirect at all
+  // Netlify supports fetch-based form submission — uncomment to use it instead of the redirect.
+  /*
+  document.getElementById('contactForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const form = e.target;
+    const data = new URLSearchParams(new FormData(form));
+    try {
+      await fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: data.toString() });
+      form.style.display = 'none';
+      document.getElementById('successBanner').classList.add('visible');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } catch (err) {
+      alert('Something went wrong. Please try again or reach out on LinkedIn!');
+    }
+  });
+  */
+</script>
+
+</body>
+</html>

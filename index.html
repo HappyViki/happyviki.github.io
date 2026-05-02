@@ -15,7 +15,7 @@
 <nav>
   <a href="#home" class="nav-logo">
     <!-- inline ladybug icon -->
-    <img src="assets/img/logo.svg" alt="Veronica's ladybug logo" style="width:2rem;">
+    <img src="assets/img/logo.svg" alt="Veronica's ladybug logo" style="width:2rem;height:2rem;">
   </a>
 
   <button class="hamburger" aria-label="Toggle menu" onclick="this.nextElementSibling.classList.toggle('open')">
@@ -46,7 +46,7 @@
 <!-- HERO -->
 <div id="home">
   <!-- Ladybug from veronicodes.com -->
-  <img class="hero-bug draggableLogo" src="assets/img/logo.svg" alt="Veronica's ladybug logo" onerror="this.style.display='none';document.getElementById('fallback-bug').style.display='block'">
+  <img class="hero-bug draggableLogo" src="assets/img/logo.svg" alt="Veronica's ladybug logo">
 
   <h1>Veroni<span>codes</span></h1>
   <p class="slogan">Fixing bugs one semicolon at a time<span>;</span></p>
@@ -241,41 +241,41 @@
 </footer>
 
 <script>
-// Make the DIV element draggable:
 dragElement(document.querySelector(".draggableLogo"));
 
 function dragElement(elmnt) {
-  var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
-  elmnt.onmousedown = dragMouseDown;
+  let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
 
-  function dragMouseDown(e) {
-    e = e || window.event;
+  elmnt.style.touchAction = "none";
+
+  elmnt.onpointerdown = dragStart;
+
+  function dragStart(e) {
     e.preventDefault();
-    // get the mouse cursor position at startup:
+
     pos3 = e.clientX;
     pos4 = e.clientY;
-    document.onmouseup = closeDragElement;
-    // call a function whenever the cursor moves:
-    document.onmousemove = elementDrag;
+
+    document.onpointerup = stopDrag;
+    document.onpointermove = drag;
   }
 
-  function elementDrag(e) {
-    e = e || window.event;
+  function drag(e) {
     e.preventDefault();
-    // calculate the new cursor position:
+
     pos1 = pos3 - e.clientX;
     pos2 = pos4 - e.clientY;
+
     pos3 = e.clientX;
     pos4 = e.clientY;
-    // set the element's new position:
+
     elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
     elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
   }
 
-  function closeDragElement() {
-    // stop moving when mouse button is released:
-    document.onmouseup = null;
-    document.onmousemove = null;
+  function stopDrag() {
+    document.onpointerup = null;
+    document.onpointermove = null;
   }
 }
 </script>

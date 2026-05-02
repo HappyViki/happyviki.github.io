@@ -23,12 +23,17 @@ body {
 
 .draggableLogo {
   position: absolute;
-  cursor: move;
+  cursor: grab;
   top: 50px;
   left: 50%;
   transform: translateX(-50%);
   user-select: none;
   -webkit-user-drag: none;
+  touch-action: none;
+}
+
+.draggableLogo:active {
+  cursor: grabbing;
 }
 
 /* NAV */

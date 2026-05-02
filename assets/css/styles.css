@@ -21,6 +21,16 @@ body {
   line-height: 1.7;
 }
 
+.draggableLogo {
+  position: absolute;
+  cursor: move;
+  top: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
 /* NAV */
 nav {
   position: sticky;
@@ -82,7 +92,7 @@ nav {
 #home {
   background: var(--black);
   color: var(--white);
-  padding: 5rem 2rem 4rem;
+  padding: calc(5rem + 80px) 2rem 4rem;
   text-align: center;
   position: relative;
   overflow: hidden;

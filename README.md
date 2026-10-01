@@ -1,4 +1,4 @@
-# Veronica Eulenberg
+# Veronica Wegrzynowski
 
 I specialize in CSS and JavaScript and learned .NET to better support backend teams and build clean, user-friendly applications.
 
